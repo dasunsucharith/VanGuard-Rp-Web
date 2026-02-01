@@ -227,6 +227,31 @@ document.addEventListener("mousemove", (e) => {
   });
 });
 
+// ============================================
+// DEPARTMENT CAROUSEL
+// ============================================
+const deptItems = document.querySelectorAll(".dept-item");
+const deptInfos = document.querySelectorAll(".dept-info");
+let currentDept = 0;
+
+function nextDept() {
+  // Remove active class from current
+  deptItems[currentDept].classList.remove("active");
+  deptInfos[currentDept].classList.remove("active");
+
+  // Update index
+  currentDept = (currentDept + 1) % deptItems.length;
+
+  // Add active class to next
+  deptItems[currentDept].classList.add("active");
+  deptInfos[currentDept].classList.add("active");
+}
+
+// Start the carousel if elements exist
+if (deptItems.length > 0) {
+  setInterval(nextDept, 5000);
+}
+
 console.log(
   "%c🎮 Vanguard Roleplay",
   "font-size: 24px; font-weight: bold; color: #00f0ff;",

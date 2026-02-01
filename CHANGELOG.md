@@ -2,7 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [1.3.0] - 2026-02-01
+
+### Added
+
+- New "Departments" section after the hero section.
+- Synchronized fading carousel showcasing Medical Department, Police Department, and Mechanic.
+- Automatic 5-second transition logic for logo and content synchronization.
+- Custom CSS animations for smooth fade and slide-in effects.
+- Responsive layout adjustments for mobile and tablet views.
+
+### Changed
+
+- Updated department descriptions: replaced "Los Santos" with "Vanguard City".
+- Renamed "LSPD/BCSO" to "VCPD" in the Police Department section and application buttons.
 
 ## [1.2.0] - 2026-02-01
 
