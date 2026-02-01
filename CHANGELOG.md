@@ -20,6 +20,8 @@ All notable changes to this project will be documented in this file.
 ### Fixed
 
 - **Horizontal Scrolling:** Resolved overflow issues across the entire site for windows widths down to 320px.
+- **Department Spacing:** Eliminated excessive gaps between logos and descriptions on mobile by normalizing container heights and alignment.
+- **Content Stacking:** Fixed an issue where hidden department information occupied space on mobile, ensuring active text starts immediately after the logo.
 
 ## [1.3.0] - 2026-02-01
 

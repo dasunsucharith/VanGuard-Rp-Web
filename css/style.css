@@ -848,21 +848,26 @@ img {
 
 @media (max-width: 991px) {
     .dept-carousel {
-        height: 300px;
-        margin-bottom: 50px;
+        height: 250px;
+        margin-bottom: 20px;
+        align-items: flex-end;
     }
     
     .dept-content-wrapper {
-        min-height: 300px;
+        min-height: auto;
         text-align: center;
     }
     
     .dept-info {
-        position: relative;
-        transform: translateY(30px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: translateY(20px);
     }
     
     .dept-info.active {
+        position: relative;
         transform: translateY(0);
     }
 }
@@ -1063,5 +1068,5 @@ img {
   .gallery-item:nth-child(1) { grid-column: span 1; }
   
   .section-title { font-size: 1.8rem; }
-  .dept-carousel { height: 200px; }
+  .dept-carousel { height: 180px; }
 }
