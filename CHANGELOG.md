@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-02-01
+
+### Changed
+
+- Reduced font sizes across the website by approximately 10-20% for improved readability and aesthetics.
+
 ## [1.1.0] - 2026-02-01
 
 ### Added
