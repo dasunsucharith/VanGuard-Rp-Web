@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.3] - 2026-02-01
+
+### Changed
+
+- Updated footer logo to `Assets/Logo/vanguard logo.png`.
+- Restored rotation animation for header and preloader logos.
+- Added a pause interval to the header logo rotation.
+
 ## [1.1.2] - 2026-02-01
 
 ### Removed
