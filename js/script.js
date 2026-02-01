@@ -1,11 +1,18 @@
 // ============================================
 // PRELOADER
 // ============================================
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.querySelector(".preloader").classList.add("hidden");
-  }, 2000);
-});
+const hidePreloader = () => {
+  const preloader = document.querySelector(".preloader");
+  if (preloader && !preloader.classList.contains("hidden")) {
+    preloader.classList.add("hidden");
+    console.log("Preloader hidden");
+  }
+};
+
+window.addEventListener("load", hidePreloader);
+// Fallback: hide preloader even if some assets fail to load
+setTimeout(hidePreloader, 4000);
+document.addEventListener("DOMContentLoaded", () => setTimeout(hidePreloader, 1000));
 
 // ============================================
 // CUSTOM CURSOR
@@ -13,38 +20,37 @@ window.addEventListener("load", () => {
 const cursor = document.querySelector(".cursor");
 const cursorFollower = document.querySelector(".cursor-follower");
 
-let mouseX = 0,
-  mouseY = 0;
-let cursorX = 0,
-  cursorY = 0;
-let followerX = 0,
-  followerY = 0;
+if (cursor && cursorFollower) {
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+  let followerX = 0, followerY = 0;
 
-document.addEventListener("mousemove", (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
+  document.addEventListener("mousemove", (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-function animateCursor() {
-  cursorX += (mouseX - cursorX) * 0.2;
-  cursorY += (mouseY - cursorY) * 0.2;
-  followerX += (mouseX - followerX) * 0.1;
-  followerY += (mouseY - followerY) * 0.1;
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
+    followerX += (mouseX - followerX) * 0.1;
+    followerY += (mouseY - followerY) * 0.1;
 
-  cursor.style.left = cursorX + "px";
-  cursor.style.top = cursorY + "px";
-  cursorFollower.style.left = followerX + "px";
-  cursorFollower.style.top = followerY + "px";
+    cursor.style.left = cursorX + "px";
+    cursor.style.top = cursorY + "px";
+    cursorFollower.style.left = followerX + "px";
+    cursorFollower.style.top = followerY + "px";
 
-  requestAnimationFrame(animateCursor);
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Cursor hover effects
+  document.querySelectorAll("a, button, .glass-card, .rule-header").forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("active"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
+  });
 }
-animateCursor();
-
-// Cursor hover effects
-document.querySelectorAll("a, button, .glass-card").forEach((el) => {
-  el.addEventListener("mouseenter", () => cursor.classList.add("active"));
-  el.addEventListener("mouseleave", () => cursor.classList.remove("active"));
-});
 
 // ============================================
 // NAVBAR SCROLL EFFECT
@@ -262,88 +268,111 @@ console.log(
 );
 
 // ============================================
-// APPLICATION MODAL LOGIC
+// APPLICATION FORM LOGIC
 // ============================================
-const appModal = document.getElementById(""appModal"");
-const appModalContent = appModal.querySelector("".modal-content"");
-const modalTitle = document.getElementById(""modal-title"");
-const appliedDeptInput = document.getElementById(""appliedDept"");
-const applicationForm = document.getElementById(""applicationForm"");
-const formStatus = document.getElementById(""formStatus"");
-const closeBtn = document.querySelector("".modal-close"");
-const overlay = document.querySelector("".modal-overlay"");
+(function() {
+    const applicationForm = document.getElementById("applicationForm");
+    const appliedDeptSelect = document.getElementById("appliedDept");
+    const formStatus = document.getElementById("formStatus");
 
-// Open modal
-document.querySelectorAll("".app-trigger"").forEach(btn => {
-    btn.addEventListener(""click"", () => {
-        const dept = btn.getAttribute(""data-dept"");
-        modalTitle.textContent = \Apply for \\;
-        appliedDeptInput.value = dept;
-        appModal.classList.add(""active"");
-        document.body.style.overflow = ""hidden""; // Prevent scroll
-        formStatus.textContent = """";
-        formStatus.className = ""form-status"";
-    });
-});
+    console.log("Application system initializing...");
 
-// Close modal function
-function closeModal() {
-    appModal.classList.remove(""active"");
-    document.body.style.overflow = """";
-    applicationForm.reset();
-}
-
-closeBtn.addEventListener(""click"", closeModal);
-overlay.addEventListener(""click"", closeModal);
-
-// Handle Form Submission
-applicationForm.addEventListener(""submit"", async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(applicationForm);
-    const data = {
-        playerName: formData.get(""playerName""),
-        playerAge: formData.get(""playerAge""),
-        experience: formData.get(""experience""),
-        motivation: formData.get(""motivation""),
-        department: formData.get(""department"")
-    };
-
-    formStatus.textContent = ""Sending application..."";
-    formStatus.className = ""form-status"";
-
-    const webhookUrl = ""https://discord.com/api/webhooks/1467498495652135047/uQIsu2b7-n4PGE_vSu5Ny4zxTMlJNcBD8gIIQi3RPl_EIxM8ALyaFl-Ezo7-0IGJqYqB"";
-
-    const embed = {
-        title: ""New Job Application"",
-        color: 0xffffff, // White
-        fields: [
-            { name: ""Department"", value: data.department, inline: true },
-            { name: ""Discord Name/ID"", value: data.playerName, inline: true },
-            { name: ""Age"", value: data.playerAge, inline: true },
-            { name: ""Previous Experience"", value: data.experience },
-            { name: ""Motivation"", value: data.motivation }
-        ],
-        footer: { text: ""Vanguard Roleplay - Automated System"" },
-        timestamp: new Date()
-    };
-
-    try {
-        const response = await fetch(webhookUrl, {
-            method: ""POST"",
-            headers: { ""Content-Type"": ""application/json"" },
-            body: JSON.stringify({ embeds: [embed] })
-        });
-
-        if (response.ok) {
-            formStatus.textContent = ""Application sent successfully!"";
-            formStatus.className = ""form-status success"";
-            setTimeout(closeModal, 2000);
-        } else {
-            throw new Error(""Failed to send"");
-        }
-    } catch (error) {
-        formStatus.textContent = ""Error sending application. Please try again."";
-        formStatus.className = ""form-status error"";
+    if (!applicationForm) {
+        console.warn("Application form not found on this page.");
+        return;
     }
-});
+
+    // Handle "Apply" trigger clicks
+    document.addEventListener("click", (e) => {
+        const trigger = e.target.closest(".app-trigger");
+        if (trigger) {
+            e.preventDefault();
+            const dept = trigger.getAttribute("data-dept");
+            console.log("Trigger clicked for department:", dept);
+            
+            // 1. Auto-select department
+            if (appliedDeptSelect) {
+                // Find and select the option that matches the data-dept
+                for (let option of appliedDeptSelect.options) {
+                    if (option.value === dept) {
+                        option.selected = true;
+                        break;
+                    }
+                }
+            }
+            
+            // 2. Smooth scroll to section
+            const applySection = document.getElementById("apply");
+            if (applySection) {
+                applySection.scrollIntoView({ behavior: "smooth", block: "start" });
+                // Briefly highlight the form
+                const container = applySection.querySelector(".apply-container");
+                if (container) {
+                    container.style.boxShadow = "0 0 30px rgba(255, 255, 255, 0.2)";
+                    setTimeout(() => container.style.boxShadow = "", 2000);
+                }
+            }
+        }
+    });
+
+    // Handle Form Submission
+    applicationForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        console.log("Form submission started...");
+        
+        const formData = new FormData(applicationForm);
+        const data = {
+            playerName: formData.get("playerName"),
+            playerAge: formData.get("playerAge"),
+            experience: formData.get("experience"),
+            motivation: formData.get("motivation"),
+            department: formData.get("department")
+        };
+
+        if (formStatus) {
+            formStatus.textContent = "Sending application...";
+            formStatus.className = "form-status";
+        }
+
+        const webhookUrl = "https://discord.com/api/webhooks/1467498495652135047/uQIsu2b7-n4PGE_vSu5Ny4zxTMlJNcBD8gIIQi3RPl_EIxM8ALyaFl-Ezo7-0IGJqYqB";
+
+        const embed = {
+            title: "New Job Application",
+            color: 0xffffff,
+            fields: [
+                { name: "Department", value: data.department || "N/A", inline: true },
+                { name: "Discord Name/ID", value: data.playerName || "N/A", inline: true },
+                { name: "Age", value: data.playerAge || "N/A", inline: true },
+                { name: "Previous Experience", value: data.experience || "N/A" },
+                { name: "Motivation", value: data.motivation || "N/A" }
+            ],
+            footer: { text: "Vanguard Roleplay - Automated System" },
+            timestamp: new Date()
+        };
+
+        try {
+            const response = await fetch(webhookUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ embeds: [embed] })
+            });
+
+            if (response.ok) {
+                console.log("Application sent successfully!");
+                if (formStatus) {
+                    formStatus.textContent = "Application submitted successfully! Our team will review it soon.";
+                    formStatus.className = "form-status success";
+                }
+                applicationForm.reset();
+            } else {
+                throw new Error("Failed to send");
+            }
+        } catch (error) {
+            console.error("Webhook error:", error);
+            if (formStatus) {
+                formStatus.textContent = "Error sending application. Please try again.";
+                formStatus.className = "form-status error";
+            }
+        }
+    });
+})();

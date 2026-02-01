@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/video.css">
+    <link rel="stylesheet" href="css/cursor.css">
 </head>
 <body>
     <!-- Preloader -->
@@ -119,7 +120,7 @@
                             <p class="section-description">
                                 Join the elite team of healthcare professionals in Vanguard City. From emergency response to surgical care, provide the critical support our citizens need 24/7.
                             </p>
-                            <button class="btn btn-primary mt-4 app-trigger" data-dept="Medical Department">Apply for EMS</button>
+                            <a href="#" class="btn btn-primary mt-4 app-trigger" data-dept="Medical Department">Apply for EMS</a>
                         </div>
                         <div class="dept-info" data-dept="police">
                             <span class="section-tag">Police Department</span>
@@ -127,7 +128,7 @@
                             <p class="section-description">
                                 Dedicated to maintaining order and justice. Join the VCPD to experience high-intensity pursuits, investigation, and community policing at its finest.
                             </p>
-                            <button class="btn btn-primary mt-4 app-trigger" data-dept="Police Department">Apply for VCPD</button>
+                            <a href="#" class="btn btn-primary mt-4 app-trigger" data-dept="Police Department">Apply for VCPD</a>
                         </div>
                         <div class="dept-info" data-dept="mechanic">
                             <span class="section-tag">Mechanic</span>
@@ -135,7 +136,7 @@
                             <p class="section-description">
                                 The backbone of the city's automotive culture. Repair, customize, and maintain the finest vehicles in Vanguard City. Keep the city moving.
                             </p>
-                            <button class="btn btn-primary mt-4 app-trigger" data-dept="Mechanic">Apply for Mechanic</button>
+                            <a href="#" class="btn btn-primary mt-4 app-trigger" data-dept="Mechanic">Apply for Mechanic</a>
                         </div>
                     </div>
                 </div>
@@ -584,6 +585,55 @@
         </div>
     </section>
 
+    <!-- Application Section -->
+    <section id="apply" class="apply-section reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Career Opportunities</span>
+                <h2 class="section-title">Join the <span class="highlight">Vanguard City</span> Team</h2>
+                <p class="section-description">Select a department and submit your application to start your journey.</p>
+            </div>
+            
+            <div class="apply-container glass-panel">
+                <form id="applicationForm" class="app-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="appliedDept">Select Department</label>
+                            <select id="appliedDept" name="department" required>
+                                <option value="" disabled selected>Choose a department...</option>
+                                <option value="Medical Department">Medical Department (EMS)</option>
+                                <option value="Police Department">Police Department (VCPD)</option>
+                                <option value="Mechanic">Mechanic</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="playerName">Discord Name / ID</label>
+                            <input type="text" id="playerName" name="playerName" placeholder="e.g. JohnDoe#1234" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="playerAge">Age</label>
+                        <input type="number" id="playerAge" name="playerAge" min="15" max="99" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="experience">Previous Experience</label>
+                        <textarea id="experience" name="experience" placeholder="Tell us about your experience in this role..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="motivation">Why do you want to join?</label>
+                        <textarea id="motivation" name="motivation" placeholder="Your motivation for joining this department..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">Submit Application</button>
+                    <div id="formStatus" class="form-status"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -650,39 +700,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Application Modal -->
-    <div class="app-modal" id="appModal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content glass-panel">
-            <button class="modal-close">&times;</button>
-            <div class="modal-header">
-                <h2 id="modal-title">Job Application</h2>
-                <p id="modal-subtitle">Join the Vanguard City team</p>
-            </div>
-            <form id="applicationForm" class="app-form">
-                <input type="hidden" id="appliedDept" name="department">
-                <div class="form-group">
-                    <label for="playerName">Discord Name / ID</label>
-                    <input type="text" id="playerName" name="playerName" placeholder="e.g. JohnDoe#1234" required>
-                </div>
-                <div class="form-group">
-                    <label for="playerAge">Age</label>
-                    <input type="number" id="playerAge" name="playerAge" min="15" max="99" required>
-                </div>
-                <div class="form-group">
-                    <label for="experience">Previous Experience</label>
-                    <textarea id="experience" name="experience" placeholder="Tell us about your experience in this role..." required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="motivation">Why do you want to join?</label>
-                    <textarea id="motivation" name="motivation" placeholder="Your motivation for joining this department..." required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary w-100">Submit Application</button>
-            </form>
-            <div id="formStatus" class="form-status"></div>
-        </div>
-    </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="js/video.js"></script>

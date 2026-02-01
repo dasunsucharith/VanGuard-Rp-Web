@@ -1093,85 +1093,32 @@ img {
 }
 
 /* ============================================
-   APPLICATION MODAL STYLES
+   CAREER / APPLICATION SECTION
 ============================================ */
-.app-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.app-modal.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.modal-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(8px);
-}
-
-.modal-content {
-  width: 90%;
-  max-width: 550px;
+.apply-section {
+  padding: 100px 0;
+  background: linear-gradient(to bottom, var(--bg-surface), var(--bg-deep));
   position: relative;
-  z-index: 10;
-  padding: 40px;
-  border-radius: var(--radius-md);
-  transform: translateY(30px);
-  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.app-modal.active .modal-content {
-  transform: translateY(0);
+.apply-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: var(--radius-lg);
+  position: relative;
+  z-index: 2;
 }
 
-.modal-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: var(--primary-dim);
-  font-size: 2rem;
-  cursor: pointer;
-  transition: color 0.3s;
-}
-
-.modal-close:hover {
-  color: var(--primary);
-}
-
-.modal-header {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.modal-header h2 {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
-  margin-bottom: 5px;
-  color: #fff;
-}
-
-.modal-header p {
-  font-family: var(--font-mono);
-  color: var(--primary-dim);
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 2px;
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .form-group label {
@@ -1180,43 +1127,78 @@ img {
   font-size: 0.8rem;
   text-transform: uppercase;
   color: var(--primary-dim);
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
 }
 
 .form-group input, 
+.form-group select,
 .form-group textarea {
   width: 100%;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-light);
-  padding: 12px 15px;
+  padding: 15px 20px;
   color: #fff;
   border-radius: 4px;
   font-family: var(--font-body);
-  transition: border-color 0.3s, background 0.3s;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 18px;
+}
+
+.form-group select option {
+  background: #000;
+  color: #fff;
 }
 
 .form-group input:focus, 
+.form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-dim);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 .form-group textarea {
-  height: 100px;
+  height: 150px;
   resize: none;
 }
 
 .form-status {
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
   font-family: var(--font-mono);
   font-size: 0.9rem;
   min-height: 24px;
+  padding: 15px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.form-status.success { color: #00ff88; }
-.form-status.error { color: #ff4444; }
+.form-status.success { 
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  color: #00ff88; 
+}
+
+.form-status.error { 
+  background: rgba(255, 68, 68, 0.05);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  color: #ff4444; 
+}
 
 .w-100 { width: 100%; justify-content: center; }
+
+@media (max-width: 768px) {
+  .apply-container { padding: 30px 20px; }
+  .form-grid { grid-template-columns: 1fr; gap: 0; }
+}

@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.6.0] - 2026-02-01
+
+### Added
+
+- **Dedicated Career Section:** Replaced the application modal with a permanent, high-impact section located before the footer.
+- **Smart Navigation:** Implemented automatic smooth scrolling and auto-selection of departments when clicking "Apply" buttons.
+- **Custom Cursor Styles:** Added a dedicated `css/cursor.css` to handle premium cursor effects without interfering with site interactions.
+
+### Changed
+
+- **UI Architecture:** Abandoned fixed-position modal overlays in favor of an in-page section to prevent click-blocking and improve mobile reliability.
+- **Preloader Robustness:** Optimized preloader logic in `js/script.js` with fail-safe timeouts to ensure site availability even if assets fail to load.
+
+### Fixed
+
+- **Global Click Issue:** Resolved a critical bug where invisible cursor layers and lingering preloader states were making buttons non-clickable.
+- **Layout Flow:** Relocated the application form to appear naturally before the footer as per the user journey.
+
 ## [1.5.0] - 2026-02-01
 
 ### Added
