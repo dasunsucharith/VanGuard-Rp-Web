@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.1.4] - 2026-02-01
+
+### Changed
+
+- Removed "Join Discord" CTA from the header.
+- Centered the header logo on desktop view.
+- Updated navigation menu layout to split items evenly (3 left, 3 right) around the logo.
+
 ## [1.1.3] - 2026-02-01
 
 ### Changed
